@@ -133,7 +133,18 @@ sanitize_links <- function(cv, text){
 
 #' @description Take a position data frame and the section id desired and prints the section to markdown.
 #' @param section_id ID of the entries section to be printed as encoded by the `section` column of the `entries` table
-print_section <- function(cv, section_id, glue_template = "default"){
+#' @param resume logical vector. Determines whether to filter entries by `in_resume`. Default is FALSE.
+print_section <- function(cv, section_id, glue_template = "default", resume = FALSE){
+
+  # TODO: need to re-think this, as filtered cv is saved to object
+  # meaning all following sections will be "resume" format
+  if(resume == TRUE){
+
+    cv$entries_data <-
+      cv$entries_data %>%
+      dplyr::filter(in_resume == TRUE)
+
+  }
 
   if(glue_template == "default"){
     glue_template <- "
