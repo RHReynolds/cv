@@ -5,10 +5,11 @@
 # loaded and load the cached version in the .Rmd instead of re-fetching it twice
 # for the HTML and PDF rendering. This exercise is left to the reader.
 
-# Knit the HTML version
+
+# Knit cv to HTML version
 rmarkdown::render("cv.rmd",
                   params = list(pdf_mode = FALSE),
-                  output_file = "cv.html")
+                  output_file = "docs/cv.html")
 
 # Knit the PDF version to temporary html location
 tmp_html_cv_loc <- fs::file_temp(ext = ".html")
@@ -18,4 +19,34 @@ rmarkdown::render("cv.rmd",
 
 # Convert to PDF using Pagedown
 pagedown::chrome_print(input = tmp_html_cv_loc,
-                       output = "cv.pdf")
+                       output = "docs/rhr_cv.pdf")
+
+# Knit resume to HTML version
+rmarkdown::render("resume.rmd",
+                  params = list(pdf_mode = FALSE),
+                  output_file = "docs/resume.html")
+
+# Knit the PDF version to temporary html location
+tmp_html_cv_loc <- fs::file_temp(ext = ".html")
+rmarkdown::render("resume.rmd",
+                  params = list(pdf_mode = TRUE),
+                  output_file = tmp_html_cv_loc)
+
+# Convert to PDF using Pagedown
+pagedown::chrome_print(input = tmp_html_cv_loc,
+                       output = "docs/rhr_resume.pdf")
+
+# Knit publications to HTML version
+rmarkdown::render("publications.rmd",
+                  params = list(pdf_mode = FALSE),
+                  output_file = "docs/publications.html")
+
+# Knit the PDF version to temporary html location
+tmp_html_cv_loc <- fs::file_temp(ext = ".html")
+rmarkdown::render("publications.rmd",
+                  params = list(pdf_mode = TRUE),
+                  output_file = tmp_html_cv_loc)
+
+# Convert to PDF using Pagedown
+pagedown::chrome_print(input = tmp_html_cv_loc,
+                       output = "docs/rhr_publications.pdf")

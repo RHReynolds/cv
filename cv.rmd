@@ -7,7 +7,7 @@ params:
     value: true
 output:
   pagedown::html_resume:
-    css: ['dd_cv.css', 'resume']
+    css: ['css/dd_cv.css', 'resume']
     self_contained: true
 ---
 
@@ -56,7 +56,7 @@ datadrivencv::build_network_logo(CV$entries_data)
 if(params$pdf_mode){
   cat("View this CV online with links at _https://rhreynolds.github.io/cv/_")
 } else {
-  cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/nstrayer/cv/raw/master/rhr_cv.pdf)")
+  cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/RHReynolds/cv/blob/main/docs/rhr_cv.pdf)")
 }
 ```
 
@@ -69,7 +69,7 @@ CV %>% print_contact_info()
 
 
 
-Language Skills {#skills}
+Programming languages {#skills}
 --------------------------------------------------------------------------------
 
 ```{r}
@@ -81,7 +81,7 @@ CV %>% print_skill_bars()
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-Made with the R package [**pagedown**](https://github.com/rstudio/pagedown). 
+Made with the R packages [datadrivencv](https://github.com/nstrayer/datadrivencv) and  [pagedown](https://github.com/rstudio/pagedown). 
 
 The source code is available [GitHub](https://github.com/RHReynolds/cv).
 
@@ -100,69 +100,55 @@ Regina H Reynolds {#title}
 CV %<>% print_text_block("intro") 
 ```
 
-
-
 Education {data-icon=graduation-cap data-concise=true}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %<>% print_section('education')
+CV %<>% print_section('education', resume = FALSE)
 ```
 
-
-
-<!-- Research Experience {data-icon=laptop} -->
-<!-- -------------------------------------------------------------------------------- -->
-
-<!-- ```{r} -->
-<!-- CV %<>% print_section('research_positions') -->
-<!-- ``` -->
-
-<!-- <br> -->
-<!-- <br> -->
-
-Work Experience {data-icon=suitcase}
+Work experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %<>% print_section('work_experience')
+CV %<>% print_section('work_experience', resume = TRUE)
 ```
 
-<!-- These breaks just force a new page so section doesnt get cut off -->
-<br>
-<br>
-<br>
-
-Teaching Experience {data-icon=chalkboard-teacher}
+Teaching experience {data-icon=chalkboard-teacher}
 --------------------------------------------------------------------------------
 
-::: aside
 ```{r}
-CV %<>% print_text_block('teaching_experience_aside')
+CV %<>% print_section('teaching_positions', resume = TRUE)
 ```
-:::
-
-```{r}
-CV %<>% print_section('teaching_positions')
-```
-
 
 
 Voluntary Work {data-icon=hands-helping}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %<>% print_section('voluntary_work')
+CV %<>% print_section('voluntary_work', resume = TRUE)
+```
+
+Key publications {data-icon=book}
+--------------------------------------------------------------------------------
+
+::: aside
+```{r}
+CV %<>% print_text_block('publications_aside')
+```
+:::
+
+```{r}
+CV %<>% print_section('selected_publications')
 ```
 
 
-Selected Publications, Posters, and Talks {data-icon=book}
+Conferences {data-icon=comments}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %<>% print_section('academic_articles')
+CV %<>% print_section('conferences')
 ```
-
 
 
 ```{r}
