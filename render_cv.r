@@ -1,52 +1,60 @@
-# This script builds both the HTML and PDF versions of your CV
+# Description: script to builds both the HTML and PDF versions of your CV
+
+#---- Load libraries --------------------
+
+library(rmarkdown)
+library(here)
+library(stringr)
+library(magrittr)
+
+#---- Main -----------------------------
 
 # If you wanted to speed up rendering for googlesheets driven CVs you could use
 # this script to cache a version of the CV_Printer class with data already
 # loaded and load the cached version in the .Rmd instead of re-fetching it twice
 # for the HTML and PDF rendering. This exercise is left to the reader.
 
+rmds <- 
+  list.files(
+    here::here(),
+    pattern = "*.rmd"
+  )
 
-# Knit cv to HTML version
-rmarkdown::render("cv.rmd",
-                  params = list(pdf_mode = FALSE),
-                  output_file = "docs/cv.html")
-
-# Knit the PDF version to temporary html location
-tmp_html_cv_loc <- fs::file_temp(ext = ".html")
-rmarkdown::render("cv.rmd",
-                  params = list(pdf_mode = TRUE),
-                  output_file = tmp_html_cv_loc)
-
-# Convert to PDF using Pagedown
-pagedown::chrome_print(input = tmp_html_cv_loc,
-                       output = "docs/rhr_cv.pdf")
-
-# Knit resume to HTML version
-rmarkdown::render("resume.rmd",
-                  params = list(pdf_mode = FALSE),
-                  output_file = "docs/resume.html")
-
-# Knit the PDF version to temporary html location
-tmp_html_cv_loc <- fs::file_temp(ext = ".html")
-rmarkdown::render("resume.rmd",
-                  params = list(pdf_mode = TRUE),
-                  output_file = tmp_html_cv_loc)
-
-# Convert to PDF using Pagedown
-pagedown::chrome_print(input = tmp_html_cv_loc,
-                       output = "docs/rhr_resume.pdf")
-
-# Knit publications to HTML version
-rmarkdown::render("publications.rmd",
-                  params = list(pdf_mode = FALSE),
-                  output_file = "docs/publications.html")
-
-# Knit the PDF version to temporary html location
-tmp_html_cv_loc <- fs::file_temp(ext = ".html")
-rmarkdown::render("publications.rmd",
-                  params = list(pdf_mode = TRUE),
-                  output_file = tmp_html_cv_loc)
-
-# Convert to PDF using Pagedown
-pagedown::chrome_print(input = tmp_html_cv_loc,
-                       output = "docs/rhr_publications.pdf")
+for(rmd in rmds){
+  
+  name <- 
+    rmd %>% 
+    stringr::str_remove(
+      "\\..*"
+    )
+  
+  print(
+    stringr::str_c("Knitting ", name)
+    )
+  
+  # Knit rmd to HTML version
+  rmarkdown::render(
+    stringr::str_c(name, ".rmd"),
+    params = list(pdf_mode = FALSE),
+    output_file = 
+      stringr::str_c("docs/", name, ".html")
+  )
+  
+  # Knit the PDF version to temporary html location
+  tmp_html_cv_loc <- fs::file_temp(ext = ".html")
+  
+  rmarkdown::render(
+    stringr::str_c(name, ".rmd"),
+    params = list(pdf_mode = TRUE),
+    output_file = tmp_html_cv_loc
+  )
+  
+  # Convert to PDF using Pagedown
+  pagedown::chrome_print(
+    input = tmp_html_cv_loc,
+    output = 
+      stringr::str_c("docs/rhr_", name, ".pdf")
+    )
+  
+  
+}
