@@ -51,11 +51,8 @@ Aside
 datadrivencv::build_network_logo(CV$entries_data)
 ```
 
-
 ```{r}
-if(params$pdf_mode){
-  cat("View this publications list online with links at _https://rhreynolds.github.io/cv/_")
-} else {
+if(params$pdf_mode == FALSE){
   cat("[<i class='fas fa-download'></i> Download as a PDF](https://github.com/RHReynolds/cv/blob/main/docs/rhr_publications.pdf)")
 }
 ```
@@ -70,6 +67,8 @@ CV %>% print_contact_info()
 
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
+
+The long-form version of my CV is available [here](https://rhreynolds.github.io/cv/cv.html). 
 
 Made with the R packages [datadrivencv](https://github.com/nstrayer/datadrivencv) and  [pagedown](https://github.com/rstudio/pagedown). 
 

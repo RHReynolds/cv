@@ -31,13 +31,13 @@ sup {
   /* Override default right margin for sidebar*/
   --pagedjs-margin-top: 0.5in;
   --pagedjs-margin-bottom: 0.5in;
-  --pagedjs-margin-right: 0.2in;
-  --pagedjs-margin-left: 0.2in;
+  --pagedjs-margin-right: 0.15in;
+  --pagedjs-margin-left: 0.15in;
 }
 
 /* Customize some of the sizing variables */
 :root {
-  --sidebar-width: 10rem; /* Shrink sidebar width  */
+  --sidebar-width: 12rem; /* Shrink sidebar width  */
   --sidebar-background-color: #f7fbff; /* Make sidebar blue */
   --sidebar-horizontal-padding: 0.01in; /* Reduce sidebar padding */
   --decorator-outer-dim: 10px; /* Make position deliniating circles larger */

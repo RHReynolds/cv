@@ -54,7 +54,7 @@ datadrivencv::build_network_logo(CV$entries_data)
 
 ```{r}
 if(params$pdf_mode){
-  cat("View this CV online with links at _https://rhreynolds.github.io/cv/_")
+  cat("View this CV online with links at https://rhreynolds.github.io/cv")
 } else {
   cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/RHReynolds/cv/blob/main/docs/rhr_cv.pdf)")
 }
@@ -100,12 +100,16 @@ Regina H Reynolds {#title}
 CV %<>% print_text_block("intro") 
 ```
 
+
 Education {data-icon=graduation-cap data-concise=true}
 --------------------------------------------------------------------------------
 
 ```{r}
 CV %<>% print_section('education', resume = FALSE)
 ```
+
+<br>
+
 
 Work experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
@@ -114,12 +118,17 @@ Work experience {data-icon=suitcase}
 CV %<>% print_section('work_experience', resume = TRUE)
 ```
 
+<br>
+
+
 Teaching experience {data-icon=chalkboard-teacher}
 --------------------------------------------------------------------------------
 
 ```{r}
 CV %<>% print_section('teaching_positions', resume = TRUE)
 ```
+
+<br>
 
 
 Voluntary Work {data-icon=hands-helping}
@@ -128,6 +137,9 @@ Voluntary Work {data-icon=hands-helping}
 ```{r}
 CV %<>% print_section('voluntary_work', resume = TRUE)
 ```
+
+<br>
+
 
 Key publications {data-icon=book}
 --------------------------------------------------------------------------------
@@ -142,6 +154,8 @@ CV %<>% print_text_block('publications_aside')
 CV %<>% print_section('selected_publications')
 ```
 
+<br>
+
 
 Conferences {data-icon=comments}
 --------------------------------------------------------------------------------
@@ -149,6 +163,8 @@ Conferences {data-icon=comments}
 ```{r}
 CV %<>% print_section('conferences')
 ```
+
+<br>
 
 
 ```{r}
