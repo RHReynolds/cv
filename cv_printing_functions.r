@@ -249,3 +249,24 @@ print_contact_info <- function(cv){
 
   invisible(cv)
 }
+
+#' @description Introduce breaks depending on pdf mode
+print_breaks <- function(html_breaks = 1, pdf_breaks = 1, pdf_mode){
+
+  if(pdf_mode){
+    cat(stringr::str_c(
+      "\n",
+      stringr::str_c(rep("<br>", pdf_breaks), collapse = "\n"),
+      "\n")
+      )
+    } else {
+      
+      cat(stringr::str_c(
+        "\n",
+        stringr::str_c(rep("<br>", html_breaks), collapse = "\n"),
+        "\n")
+      )
+
+  }
+  
+}
