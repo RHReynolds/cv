@@ -86,7 +86,7 @@ CV %>% print_skill_bars()
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-The long-form version of my CV, with a list of publications, conferences attended and voluntary work is available [here](https://rhreynolds.github.io/cv/cv.html). 
+The long-form version of my CV, with a list of publications, conferences attended and voluntary work is available [here](https://rhreynolds.github.io/cv/). 
 
 Made with the R packages [datadrivencv](https://github.com/nstrayer/datadrivencv) and  [pagedown](https://github.com/rstudio/pagedown). 
 
