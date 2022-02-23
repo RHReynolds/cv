@@ -61,7 +61,7 @@ datadrivencv::build_network_logo(CV$entries_data)
 if(params$pdf_mode){
   cat("View this resume online with links at https://rhreynolds.github.io/cv")
 } else {
-  cat("[<i class='fas fa-download'></i> Download as a PDF](https://github.com/RHReynolds/cv/blob/main/docs/rhr_resume.pdf)")
+  cat("[<i class='fas fa-download'></i> Download as a PDF](https://raw.githubusercontent.com/RHReynolds/cv/main/docs/rhr_resume.pdf)")
 }
 ```
 
