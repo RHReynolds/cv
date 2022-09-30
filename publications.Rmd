@@ -17,12 +17,13 @@ knitr::opts_chunk$set(
   echo = FALSE
 )
 
+library(here)
 library(magrittr) # For the pipe
 source("cv_printing_functions.r")
 
 # Read in all data and initialize a CV printer object
 CV <- create_CV_object(
-  data_location = "C:/Users/rhrey/OneDrive/Personal/Jobs & CVs/Latest CV/cv/raw_data/",  
+  data_location = stringr::str_c(here::here("raw_data"), "/"),  
   pdf_mode = params$pdf_mode
 )
 
