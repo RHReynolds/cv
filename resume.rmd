@@ -87,7 +87,7 @@ CV %>% print_skill_bars()
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-The long-form version of my CV, with a list of publications, conferences attended and voluntary work is available [here](https://rhreynolds.github.io/cv/). 
+The long-form version of my CV, with a list of conferences attended, teaching experience and voluntary work is available [here](https://rhreynolds.github.io/cv/). 
 
 Made with the R packages [datadrivencv](https://github.com/nstrayer/datadrivencv) and  [pagedown](https://github.com/rstudio/pagedown). 
 
@@ -108,13 +108,6 @@ Regina H Reynolds {#title}
 CV %<>% print_text_block("intro") 
 ```
 
-Education {data-icon=graduation-cap data-concise=true}
---------------------------------------------------------------------------------
-
-```{r}
-CV %<>% print_section('education')
-```
-
 Work experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
 
@@ -122,11 +115,24 @@ Work experience {data-icon=suitcase}
 CV %<>% print_section('work_experience')
 ```
 
-Teaching experience {data-icon=chalkboard-teacher}
+Education {data-icon=graduation-cap data-concise=true}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %<>% print_section('teaching_positions')
+CV %<>% print_section('education')
+```
+
+Key publications {data-icon=book}
+--------------------------------------------------------------------------------
+
+::: aside
+```{r}
+CV %<>% print_text_block('publications_aside')
+```
+:::
+
+```{r}
+CV %<>% print_section('selected_publications')
 ```
 
 ```{r}
