@@ -102,6 +102,14 @@ CV %<>% print_text_block("intro")
 ```
 
 
+Work experience {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('work_experience', resume = TRUE)
+```
+
+
 Education {data-icon=graduation-cap data-concise=true}
 --------------------------------------------------------------------------------
 
@@ -113,14 +121,6 @@ print_breaks(
   pdf_breaks = 1,
   pdf_mode = params$pdf_mode
   )
-```
-
-
-Work experience {data-icon=suitcase}
---------------------------------------------------------------------------------
-
-```{r}
-CV %<>% print_section('work_experience', resume = TRUE)
 ```
 
 
@@ -137,6 +137,7 @@ Voluntary Work {data-icon=hands-helping}
 
 ```{r}
 CV %<>% print_section('voluntary_work', resume = TRUE)
+
 ```
 
 
