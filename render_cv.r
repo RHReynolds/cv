@@ -6,6 +6,14 @@ library(rmarkdown)
 library(here)
 library(stringr)
 
+#---- Arguments -------------------------
+
+args <-
+  list(
+    input_dir = here::here("templates"),
+    output_dir = here::here("docs")
+  )
+
 #---- Main -----------------------------
 
 # If you wanted to speed up rendering for googlesheets driven CVs you could use
@@ -15,7 +23,7 @@ library(stringr)
 
 rmds <-
   list.files(
-    here::here(),
+    args$input_dir,
     pattern = "*.rmd"
   )
 
@@ -28,17 +36,16 @@ for (rmd in rmds) {
 
   # Knit rmd to HTML version
   rmarkdown::render(
-    stringr::str_c(name, ".rmd"),
+    input = file.path(args$input_dir, stringr::str_c(name, ".rmd")),
     params = list(pdf_mode = FALSE),
-    output_file =
-      stringr::str_c("docs/", name, ".html")
+    output_file = file.path(args$output_dir, stringr::str_c(name, ".html"))
   )
 
   # Knit the PDF version to temporary html location
   tmp_html_cv_loc <- fs::file_temp(ext = ".html")
 
   rmarkdown::render(
-    stringr::str_c(name, ".rmd"),
+    input = file.path(args$input_dir, stringr::str_c(name, ".rmd")),
     params = list(pdf_mode = TRUE),
     output_file = tmp_html_cv_loc
   )
@@ -46,7 +53,6 @@ for (rmd in rmds) {
   # Convert to PDF using Pagedown
   pagedown::chrome_print(
     input = tmp_html_cv_loc,
-    output =
-      stringr::str_c("docs/rhr_", name, ".pdf")
+    output = file.path(args$output_dir, stringr::str_c("rhr_", name, ".pdf"))
   )
 }
