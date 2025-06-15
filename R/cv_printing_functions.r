@@ -6,8 +6,8 @@
 #'
 #' @param data_location Path of the spreadsheets holding all your data. This can be
 #'   either a URL to a google sheet with multiple sheets containing the four
-#'   data types or a path to a folder containing four `.csv`s with the neccesary
-#'   data.
+#'   data types or a path to a folder containing an xlsx file with 4 sheets with the
+#'   the necessary info.
 #' @param source_location Where is the code to build your CV hosted?
 #' @param pdf_mode Is the output being rendered into a pdf? Aka do links need
 #'   to be stripped?
@@ -44,31 +44,16 @@ create_CV_object <- function(data_location,
     cv$text_blocks <- read_gsheet(sheet_id = "text_blocks")
     cv$contact_info <- read_gsheet(sheet_id = "contact_info")
   } else {
-    # Want to go old-school with csvs?
-    cv$entries_data <- readr::read_csv(paste0(data_location, "entries.csv"), skip = 1)
-    cv$skills <- readr::read_csv(paste0(data_location, "language_skills.csv"), skip = 1)
-    cv$text_blocks <- readr::read_csv(paste0(data_location, "text_blocks.csv"), skip = 1)
-    cv$contact_info <- readr::read_csv(paste0(data_location, "contact_info.csv"), skip = 1)
-  }
-
-
-  extract_year <- function(dates) {
-    date_year <- stringr::str_extract(dates, "(20|19)[0-9]{2}")
-    date_year[is.na(date_year)] <- lubridate::year(lubridate::ymd(Sys.Date())) + 10
-
-    date_year
-  }
-
-  parse_dates <- function(dates) {
-    date_month <- stringr::str_extract(dates, "(\\w+|\\d+)(?=(\\s|\\/|-)(20|19)[0-9]{2})")
-    date_month[is.na(date_month)] <- "1"
-
-    paste("1", date_month, extract_year(dates), sep = "-") |>
-      lubridate::dmy()
+    xlsx_file <- list.files(path = data_location, pattern = ".xlsx", full.names = TRUE)
+    cv$entries_data <- readxl::read_excel(xlsx_file, sheet = "entries", skip = 1)
+    cv$skills <- readxl::read_excel(xlsx_file, sheet = "language_skills", skip = 1)
+    cv$text_blocks <- readxl::read_excel(xlsx_file, sheet = "text_blocks", skip = 1)
+    cv$contact_info <- readxl::read_excel(xlsx_file, sheet = "contact_info", skip = 1)
   }
 
   # Clean up entries dataframe to format we need it for printing
-  cv$entries_data %<>%
+  cv$entries_data <-
+    cv$entries_data |>
     tidyr::unite(
       tidyr::starts_with("description"),
       col = "description_bullets",
@@ -79,8 +64,8 @@ create_CV_object <- function(data_location,
       description_bullets = ifelse(description_bullets != "", paste0("- ", description_bullets), ""),
       start = ifelse(start == "NULL", NA, start),
       end = ifelse(end == "NULL", NA, end),
-      start_year = extract_year(start),
-      end_year = extract_year(end),
+      start_year = .extract_year(start),
+      end_year = .extract_year(end),
       no_start = is.na(start),
       has_start = !no_start,
       no_end = is.na(end),
@@ -92,10 +77,10 @@ create_CV_object <- function(data_location,
         TRUE ~ paste(end, "-", start)
       )
     ) |>
-    dplyr::arrange(desc(parse_dates(end))) |>
+    dplyr::arrange(desc(.parse_dates(end))) |>
     dplyr::mutate_all(~ ifelse(is.na(.), "N/A", .))
 
-  cv
+  return(cv)
 }
 
 
@@ -259,4 +244,21 @@ print_breaks <- function(html_breaks = 1, pdf_breaks = 1, pdf_mode) {
       "\n"
     ))
   }
+}
+
+# Helper functions -----------------------------------------------------------------
+
+.parse_dates <- function(dates) {
+  date_month <- stringr::str_extract(dates, "(\\w+|\\d+)(?=(\\s|\\/|-)(20|19)[0-9]{2})")
+  date_month[is.na(date_month)] <- "1"
+
+  paste("1", date_month, .extract_year(dates), sep = "-") |>
+    lubridate::dmy()
+}
+
+.extract_year <- function(dates) {
+  date_year <- stringr::str_extract(dates, "(20|19)[0-9]{2}")
+  date_year[is.na(date_year)] <- lubridate::year(lubridate::ymd(Sys.Date())) + 10
+
+  date_year
 }
