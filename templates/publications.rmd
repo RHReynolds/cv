@@ -7,7 +7,7 @@ params:
     value: true
 output:
   pagedown::html_resume:
-    css: ['css/dd_publications.css', 'resume']
+    css: ['.../css/dd_publications.css', 'resume']
     self_contained: true
 ---
 
