@@ -13,27 +13,26 @@ output:
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(
-  results='asis', 
+  results = "asis",
   echo = FALSE
 )
 
 library(here)
 library(magrittr) # For the pipe
-source("cv_printing_functions.r")
+source(here::here("R", "cv_printing_functions.r"))
 
 # Read in all data and initialize a CV printer object
 CV <- create_CV_object(
-  data_location = stringr::str_c(here::here("raw_data"), "/"),  
+  data_location = stringr::str_c(here::here("raw_data"), "/"),
   pdf_mode = params$pdf_mode
 )
-
 ```
 
 
 ```{r}
 # When in pdf export mode the little dots are unaligned, so fix that with some conditional CSS.
-if(params$pdf_mode) {
-    cat("
+if (params$pdf_mode) {
+  cat("
 <style>
 :root{
   --decorator-outer-offset-left: -6.5px;
@@ -54,7 +53,7 @@ datadrivencv::build_network_logo(CV$entries_data)
 
 
 ```{r}
-if(params$pdf_mode){
+if (params$pdf_mode) {
   cat("View this CV online with links at https://rhreynolds.github.io/cv")
 } else {
   cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://raw.githubusercontent.com/RHReynolds/cv/main/docs/rhr_cv.pdf)")
@@ -65,7 +64,7 @@ Contact {#contact}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %>% print_contact_info()
+CV |> print_contact_info()
 ```
 
 
@@ -74,7 +73,7 @@ Programming languages {#skills}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %>% print_skill_bars()
+CV |> print_skill_bars()
 ```
 
 
@@ -98,7 +97,7 @@ Regina H Reynolds {#title}
 
 ```{r}
 # Note the special double pipe so we modify the CV object in place
-CV %<>% print_text_block("intro") 
+CV %<>% print_text_block("intro")
 ```
 
 
@@ -106,7 +105,7 @@ Work experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %<>% print_section('work_experience', resume = TRUE)
+CV %<>% print_section("work_experience", resume = TRUE)
 ```
 
 
@@ -114,13 +113,13 @@ Education {data-icon=graduation-cap data-concise=true}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %<>% print_section('education', resume = FALSE)
+CV %<>% print_section("education", resume = FALSE)
 
 print_breaks(
   html_breaks = 0,
   pdf_breaks = 1,
   pdf_mode = params$pdf_mode
-  )
+)
 ```
 
 
@@ -128,7 +127,7 @@ Teaching experience {data-icon=chalkboard-teacher}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %<>% print_section('teaching_positions', resume = TRUE)
+CV %<>% print_section("teaching_positions", resume = TRUE)
 ```
 
 
@@ -136,8 +135,7 @@ Voluntary Work {data-icon=hands-helping}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %<>% print_section('voluntary_work', resume = TRUE)
-
+CV %<>% print_section("voluntary_work", resume = TRUE)
 ```
 
 
@@ -146,12 +144,12 @@ Key publications {data-icon=book}
 
 ::: aside
 ```{r}
-CV %<>% print_text_block('publications_aside')
+CV %<>% print_text_block("publications_aside")
 ```
 :::
 
 ```{r}
-CV %<>% print_section('selected_publications')
+CV %<>% print_section("selected_publications")
 ```
 
 
@@ -159,7 +157,7 @@ Conferences {data-icon=comments}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %<>% print_section('conferences')
+CV %<>% print_section("conferences")
 ```
 
 
