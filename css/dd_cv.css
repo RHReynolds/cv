@@ -95,14 +95,19 @@ sup {
   content: auto;
 }
 
-.skill-bar {
-  color: white;
-  padding: 0.1rem 0.25rem;
-  margin-top: 3px;
-  position: relative;
-  width: 100%;
+#languages li,
+#tools li {
+  margin-bottom: 0.25rem;
+  display: flex;
+  align-items: center;
 }
 
+#languages li > i,
+#tools li > i {
+  width: 0.9rem;
+  text-align: right;
+  margin-right: 0.4rem;
+}
 
 /* When the class no-timeline is added we remove the after psuedo element from the header... */
 

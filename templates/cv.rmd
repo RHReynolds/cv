@@ -9,6 +9,8 @@ output:
   pagedown::html_resume:
     css: ['../css/dd_cv.css', 'resume']
     self_contained: true
+    includes:
+      after_body: ../css/footer.html
 ---
 
 ```{r, include=FALSE}
@@ -24,7 +26,7 @@ source(here::here("R", "cv_printing_functions.r"))
 # Read in all data and initialize a CV printer object
 CV <- create_CV_object(
   data_location = stringr::str_c(here::here("raw_data"), "/"),
-  pdf_mode = params$pdf_mode
+  pdf_mode = FALSE
 )
 ```
 
@@ -67,16 +69,19 @@ Contact {#contact}
 CV |> print_contact_info()
 ```
 
-
-
-Programming languages {#skills}
+Languages {#languages}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV |> print_skill_bars()
+CV |> print_skill("language")
 ```
 
+Tools {#tools}
+--------------------------------------------------------------------------------
 
+```{r}
+CV |> print_skill("tool")
+```
 
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
