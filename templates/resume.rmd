@@ -9,6 +9,8 @@ output:
   pagedown::html_resume:
     css: ['../css/dd_cv.css', 'resume']
     self_contained: true
+    includes:
+      after_body: ../css/footer.html
 ---
 
 ```{r, include=FALSE}
