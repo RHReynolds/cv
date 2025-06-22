@@ -6,3 +6,4 @@
 raw_data/*
 .vscode/*
 docs/pdf/*
+*.knit.md
