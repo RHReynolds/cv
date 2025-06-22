@@ -92,8 +92,6 @@ Disclaimer {#disclaimer}
 
 The long-form version of my CV, with a list of conferences attended, teaching experience and voluntary work is available [here](https://rhreynolds.github.io/cv/). 
 
-Made with the R packages [datadrivencv](https://github.com/nstrayer/datadrivencv) and  [pagedown](https://github.com/rstudio/pagedown). 
-
 The source code is available [GitHub](https://github.com/RHReynolds/cv).
 
 Last updated on `r Sys.Date()`.

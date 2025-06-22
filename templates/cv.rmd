@@ -86,8 +86,6 @@ CV |> print_skill("tool")
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-Made with the R packages [datadrivencv](https://github.com/nstrayer/datadrivencv) and  [pagedown](https://github.com/rstudio/pagedown). 
-
 The source code is available [GitHub](https://github.com/RHReynolds/cv).
 
 Last updated on `r Sys.Date()`.
