@@ -42,6 +42,7 @@ for (rmd in rmds) {
   )
 
   # Knit the PDF version to temporary html location
+  dir.create(file.path(args$output_dir, "pdf"), recursive = TRUE)
   tmp_html_cv_loc <-
     file.path(args$output_dir, "pdf", stringr::str_c("rhr_", name, ".html"))
 
@@ -51,9 +52,9 @@ for (rmd in rmds) {
     output_file = tmp_html_cv_loc
   )
 
-  # # Convert to PDF using Pagedown
-  # pagedown::chrome_print(
-  #   input = tmp_html_cv_loc,
-  #   output = file.path(args$output_dir, stringr::str_c("rhr_", name, ".pdf"))
-  # )
+  # Convert to PDF using Pagedown
+  pagedown::chrome_print(
+    input = tmp_html_cv_loc,
+    output = file.path(args$output_dir, stringr::str_c("rhr_", name, ".pdf"))
+  )
 }
