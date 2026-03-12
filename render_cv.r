@@ -52,9 +52,9 @@ for (rmd in rmds) {
     output_file = tmp_html_cv_loc
   )
 
-  # Convert to PDF using Pagedown
-  pagedown::chrome_print(
-    input = tmp_html_cv_loc,
-    output = file.path(args$output_dir, stringr::str_c("rhr_", name, ".pdf"))
-  )
+  # # Convert to PDF using Pagedown
+  # pagedown::chrome_print(
+  #   input = tmp_html_cv_loc,
+  #   output = file.path(args$output_dir, stringr::str_c("rhr_", name, ".pdf"))
+  # )
 }
