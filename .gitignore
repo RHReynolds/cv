@@ -7,3 +7,4 @@ raw_data/*
 .vscode/*
 docs/pdf/*
 *.knit.md
+*.DS_Store
