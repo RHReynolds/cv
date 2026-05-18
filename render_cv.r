@@ -42,6 +42,7 @@ for (rmd in rmds) {
   )
 
   # Knit the PDF version to temporary html location
+  dir.create(file.path(args$output_dir, "pdf"), recursive = TRUE)
   tmp_html_cv_loc <-
     file.path(args$output_dir, "pdf", stringr::str_c("rhr_", name, ".html"))
 
